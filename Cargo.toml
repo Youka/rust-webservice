@@ -18,6 +18,8 @@ actix-rt = "~1.1"   # https://crates.io/crates/actix-rt
 rusqlite = {version = "~0.22", features = ["bundled"]}  # https://crates.io/crates/rusqlite
 # Security
 jsonwebtoken = "~7.1"   # https://crates.io/crates/jsonwebtoken
+# Logging
+env_logger = "~0.7" # https://crates.io/crates/env_logger
 
 [profile.release]
 # Shrink binary with strong optimization
