@@ -1,11 +1,26 @@
-use actix_web::{get, Responder, HttpResponse};
+use actix_web::{get, post, Responder, HttpResponse};
 
 #[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
+async fn info() -> impl Responder {
+    HttpResponse::Ok().body("TODO: info")
 }
 
-#[get("/again")]
-async fn hello_again() -> impl Responder {
-    HttpResponse::Ok().body("Hello world again!")
+#[post("/register")]
+async fn register() -> impl Responder {
+    HttpResponse::Ok().body("TODO: register")
+}
+
+#[post("/unregister")]
+async fn unregister() -> impl Responder {
+    HttpResponse::Ok().body("TODO: unregister")
+}
+
+#[post("/login")]
+async fn login() -> impl Responder {
+    HttpResponse::Ok().body("TODO: login")
+}
+
+#[post("/logout")]
+async fn logout() -> impl Responder {
+    HttpResponse::Ok().body("TODO: logout")
 }
