@@ -2,26 +2,25 @@
 # Project information
 name = "rust-webservice"
 version = "0.1.0"
-authors = ["Youka"]
+authors = ["Christoph 'Youka' Spanknebel"]
 description = "A simple webservice in rust. Covers security by JWT and communicates by REST in JSON format."
-# Rust version
+# Language features
 edition = "2018"
 # Documentation
 readme = "README.md"
 license = "MIT"
 
-[[bin]]
-name = "rust-webservice"
-
 [dependencies]
-# Web
-actix-web = "~2"
-actix-rt = "~1.1"
+# Http server
+actix-web = "~2"    # https://crates.io/crates/actix-web
+actix-rt = "~1.1"   # https://crates.io/crates/actix-rt
+# Database
+rusqlite = {version = "~0.22", features = ["bundled"]}  # https://crates.io/crates/rusqlite
 # Security
-jsonwebtoken = "~7.1"
+jsonwebtoken = "~7.1"   # https://crates.io/crates/jsonwebtoken
 
 [profile.release]
-# Shrink binary by over-optimization
+# Shrink binary with strong optimization
 lto = true
 codegen-units = 1
 panic = "abort"
