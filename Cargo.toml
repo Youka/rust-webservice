@@ -1,0 +1,27 @@
+[package]
+# Project information
+name = "rust-webservice"
+version = "0.1.0"
+authors = ["Youka"]
+description = "A simple webservice in rust. Covers security by JWT and communicates by REST in JSON format."
+# Rust version
+edition = "2018"
+# Documentation
+readme = "README.md"
+license = "MIT"
+
+[[bin]]
+name = "rust-webservice"
+
+[dependencies]
+# Web
+actix-web = "~2"
+actix-rt = "~1.1"
+# Security
+jsonwebtoken = "~7.1"
+
+[profile.release]
+# Shrink binary by over-optimization
+lto = true
+codegen-units = 1
+panic = "abort"
