@@ -2,7 +2,7 @@ use actix_web::{get, post, Responder, HttpResponse};
 
 #[get("/")]
 async fn info() -> impl Responder {
-    HttpResponse::Ok().body("TODO: info")
+    HttpResponse::Ok().json("TODO: info")
 }
 
 #[post("/register")]

@@ -3,7 +3,7 @@ mod services;
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    // Initialize logging
+    // Initialize global logging
     std::env::set_var("RUST_LOG", "info");
     env_logger::init();
     // Connect to database
@@ -19,5 +19,6 @@ async fn main() -> std::io::Result<()> {
             .wrap(actix_web::middleware::Compress::default())
     )
     .bind("127.0.0.1:".to_string() + config::PORT)?
+    .keep_alive(3)
     .run().await
 }
