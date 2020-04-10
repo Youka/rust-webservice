@@ -23,7 +23,8 @@ async fn main() -> Result<()> {
         CREATE TABLE IF NOT EXISTS users(
             id INTEGER PRIMARY KEY,
             name TEXT NOT NULL,
-            roles TEXT NOT NULL DEFAULT "user"
+            roles TEXT NOT NULL DEFAULT "user",
+            password TEXT NOT NULL
         )
     "#, params![]).expect("Creating users table failed?!");
     // Pack application shared data
