@@ -14,10 +14,10 @@ license = "MIT"
 # Http server
 actix-web = "~2"    # https://crates.io/crates/actix-web
 actix-rt = "~1.1"   # https://crates.io/crates/actix-rt
-# Database
-rusqlite = {version = "~0.22", features = ["bundled"]}  # https://crates.io/crates/rusqlite
 # Security
 actix-identity = "~0.2"   # https://crates.io/crates/actix-identity
+# Database
+rusqlite = {version = "~0.22", features = ["bundled"]}  # https://crates.io/crates/rusqlite
 # Logging
 env_logger = "~0.7" # https://crates.io/crates/env_logger
 
