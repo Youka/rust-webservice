@@ -14,13 +14,13 @@ async fn info(id: Identity) -> impl Responder {
 }
 
 // Login services
-#[get("/login")]
-async fn login(id: Identity, data: AppData) -> impl Responder {
+#[post("/login")]
+async fn login(id: Identity, _data: AppData) -> impl Responder {
     let user = "Test;roles=admin,user";
     id.remember(user.to_string());
     HttpResponse::Ok().body("Login: ".to_string() + user)
 }
-#[get("/logout")]
+#[post("/logout")]
 async fn logout(id: Identity) -> impl Responder {
     id.forget();
     HttpResponse::Ok().body("Logout!")
@@ -28,10 +28,10 @@ async fn logout(id: Identity) -> impl Responder {
 
 // Registration services
 #[post("/register")]
-async fn register(data: AppData) -> impl Responder {
+async fn register(_data: AppData) -> impl Responder {
     HttpResponse::NotImplemented().body("TODO: register")
 }
 #[post("/unregister")]
-async fn unregister(id: Identity, data: AppData) -> impl Responder {
+async fn unregister(_id: Identity, _data: AppData) -> impl Responder {
     HttpResponse::NotImplemented().body("TODO: unregister")
 }

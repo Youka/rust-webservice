@@ -4,7 +4,7 @@ mod services;
 
 // Dependencies shortcuts
 use std::{sync::Mutex, env, io::Result};
-use rusqlite::Connection;
+use rusqlite::{Connection, params};
 use actix_web::{web, HttpServer, App, middleware};
 use actix_identity::{IdentityService, CookieIdentityPolicy};
 
@@ -17,8 +17,15 @@ async fn main() -> Result<()> {
     // Initialize global logging
     env::set_var("RUST_LOG", "info");
     env_logger::init();
-    // Connect to database
+    // Connect to & initialize database
     let conn = Connection::open(config::DB_PATH).expect(&format!("Open SQLite file '{}' failed?!", config::DB_PATH));
+    conn.execute(r#"
+        CREATE TABLE IF NOT EXISTS users(
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            roles TEXT NOT NULL DEFAULT "user"
+        )
+    "#, params![]).expect("Creating users table failed?!");
     // Pack application shared data
     let data: AppData = web::Data::new(Mutex::new(conn));
     // Start http server
