@@ -15,6 +15,11 @@ async fn main() -> std::io::Result<()> {
         actix_web::App::new()
             .app_data(data.clone())
             .configure(config::register_services)
+            .wrap(actix_identity::IdentityService::new(
+                actix_identity::CookieIdentityPolicy::new(&config::IDENTITY_KEY)
+                    .name("identity")
+                    .secure(false)
+            ))
             .wrap(actix_web::middleware::Logger::default())
             .wrap(actix_web::middleware::Compress::default())
     )
