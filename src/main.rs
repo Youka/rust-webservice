@@ -37,6 +37,7 @@ async fn main() -> Result<()> {
             .wrap(IdentityService::new(
                 CookieIdentityPolicy::new(&config::IDENTITY_KEY)
                     .name("identity")
+                    .path("/")
                     .secure(false)
             ))
             .wrap(middleware::Logger::default())

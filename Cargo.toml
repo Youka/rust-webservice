@@ -3,7 +3,7 @@
 name = "rust-webservice"
 version = "0.1.0"
 authors = ["Christoph 'Youka' Spanknebel"]
-description = "A simple webservice in rust. Covers security by JWT and communicates by REST in JSON format."
+description = "A simple webservice in rust. Covers security by cookie identity, communicates by REST in JSON format and uses an embedded SQLite database to store data."
 # Language features
 edition = "2018"
 # Documentation
