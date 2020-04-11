@@ -2,7 +2,7 @@
 mod config;
 mod services;
 
-// Dependencies shortcuts
+// Module shortcuts
 use std::{sync::Mutex, env, io::Result};
 use rusqlite::{Connection, params};
 use actix_web::{web, HttpServer, App, middleware};
@@ -15,7 +15,7 @@ type AppData = web::Data<Mutex<Connection>>;
 #[actix_rt::main]
 async fn main() -> Result<()> {
     // Initialize global logging
-    env::set_var("RUST_LOG", "info");
+    env::set_var("RUST_LOG", "debug,actix_server=info");
     env_logger::init();
     // Connect to & initialize database
     let conn = Connection::open(config::DB_PATH).expect(&format!("Open SQLite file '{}' failed?!", config::DB_PATH));
@@ -24,7 +24,7 @@ async fn main() -> Result<()> {
             id INTEGER PRIMARY KEY,
             name TEXT NOT NULL UNIQUE,
             roles TEXT NOT NULL DEFAULT "user",
-            password TEXT NOT NULL
+            password TEXT NOT NULL CHECK( length(password) >= 4 )
         )
     "#, params![]).expect("Creating users table failed?!");
     // Pack application shared data
@@ -39,6 +39,7 @@ async fn main() -> Result<()> {
                 CookieIdentityPolicy::new(&config::IDENTITY_KEY)
                     .name("identity")
                     .path("/")
+                    .max_age(60 * 60 * 24)
                     .secure(false)
             ))
             .wrap(middleware::Logger::default())
